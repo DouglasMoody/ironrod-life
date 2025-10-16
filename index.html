@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Rod Life - Following the Savior's Path</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #003f87;
+            --light-blue: #0066cc;
+            --gold: #b8860b;
+            --cream: #faf8f3;
+            --dark-text: #2c2c2c;
+            --light-gray: #f5f5f5;
+            --border-gray: #d4d4d4;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--dark-text);
+            background-color: var(--cream);
+            line-height: 1.7;
+        }
+
+        /* Header and Navigation */
+        .site-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .site-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .site-title h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .site-subtitle {
+            font-size: 0.95rem;
+            font-style: italic;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        nav {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            padding: 0.5rem;
+        }
+
+        .main-nav {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .main-nav li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            display: block;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .main-nav li a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border-gray);
+        }
+
+        .intro-section h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Life Stage Grid */
+        .life-stages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stage-card {
+            background: white;
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-color: var(--primary-blue);
+        }
+
+        .stage-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .stage-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: normal;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 0.5rem;
+        }
+
+        .stage-card p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .stage-link {
+            display: inline-block;
+            color: var(--light-blue);
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .stage-link:hover {
+            border-bottom-color: var(--light-blue);
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: white;
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .resources-section h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: normal;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .resource-item {
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border-radius: 6px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .resource-item h5 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .resource-item p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .site-footer p {
+            margin: 0.5rem 0;
+            opacity: 0.9;
+        }
+
+        .scripture-verse {
+            font-style: italic;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-nav {
+                flex-direction: column;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .site-title h1 {
+                font-size: 1.5rem;
+            }
+
+            .life-stages {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Blog Preview Sections */
+        .blog-preview {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border-gray);
+        }
+
+        .blog-preview h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .blog-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .blog-item {
+            background: white;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .blog-item h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .blog-item .blog-meta {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-item p {
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <div class="site-title">
+                <h1>⚓ Iron Rod Life</h1>
+            </div>
+            <p class="site-subtitle">"Hold to the rod, the iron rod; 'Tis strong, and bright, and true"</p>
+            
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#children">Children (12 & Under)</a></li>
+                    <li><a href="#teens">Teens (13-17)</a></li>
+                    <li><a href="#young-adults">Young Single Adults (18-25)</a></li>
+                    <li><a href="#couples">Young Adult Couples</a></li>
+                    <li><a href="#parents">Parents</a></li>
+                    <li><a href="#disciples">Followers of Christ</a></li>
+                    <li><a href="#resources">Church Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Are You Taking the Straight and Narrow Path?</h2>
+        <p>Follow the Savior and live by His teachings</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="intro-section">
+            <h3>What Stage Are You at in Your Spiritual Journey?</h3>
+            <p>Each phase of life brings unique challenges and opportunities for spiritual growth. Find resources, guidance, and insights tailored to your current life stage as you strive to follow the Savior's example and hold firmly to the iron rod.</p>
+        </div>
+
+        <!-- Life Stage Cards -->
+        <div class="life-stages">
+            <!-- Children -->
+            <div class="stage-card" id="children">
+                <div class="stage-icon">👶</div>
+                <h4>Kids 12 and Younger</h4>
+                <p>In our formative years we need to learn what matters the most. Building a strong foundation of faith through scripture study, prayer, and understanding the gospel helps children develop testimonies that will sustain them throughout their lives.</p>
+                <a href="#children-blogs" class="stage-link">Explore Resources →</a>
+            </div>
+
+            <!-- Teens -->
+            <div class="stage-card" id="teens">
+                <div class="stage-icon">🎓</div>
+                <h4>I'm a Teen (13-17)</h4>
+                <p>My parents want me to live the most rewarding life and I need the tools and knowledge to help. Navigate the challenges of adolescence with gospel-centered guidance on social media, peer pressure, dating standards, and building lasting testimonies.</p>
+                <a href="#teen-blogs" class="stage-link">Explore Resources →</a>
+            </div>
+
+            <!-- Young Single Adults -->
+            <div class="stage-card" id="young-adults">
+                <div class="stage-icon">🎯</div>
+                <h4>Young Single Adult (18-25)</h4>
+                <p>Single adults are highly targeted. You are legally able to be preyed upon by many big corporations, as well as peer pressure to do "what's normal". Learn why you need to be exceptionally cautious in 2020 and beyond, and how to maintain your values in an increasingly challenging world.</p>
+                <a href="#ysa-blogs" class="stage-link">Explore Resources →</a>
+            </div>
+
+            <!-- Young Adult Couples -->
+            <div class="stage-card" id="couples">
+                <div class="stage-icon">💑</div>
+                <h4>Young Adult Couples</h4>
+                <p>The foundation of the gospel enables great opportunity for happiness and equally important; a successful marriage and family. Build your eternal partnership on Christ-centered principles with practical advice for newlyweds and young families.</p>
+                <a href="#couple-blogs" class="stage-link">Explore Resources →</a>
+            </div>
+
+            <!-- Parents -->
+            <div class="stage-card" id="parents">
+                <div class="stage-icon">👨‍👩‍👧‍👦</div>
+                <h4>I'm a Parent</h4>
+                <p>Resources for parents to protect youth from the modern threats in a digital age. Additionally learn how to make life-long bonds that don't end at adulthood. Discover strategies for teaching the gospel at home and creating a Christ-centered family environment.</p>
+                <a href="#parent-blogs" class="stage-link">Explore Resources →</a>
+            </div>
+
+            <!-- Followers of Christ -->
+            <div class="stage-card" id="disciples">
+                <div class="stage-icon">✝️</div>
+                <h4>Follower of Christ</h4>
+                <p>Your spiritual journey is still going on. There is much to see and much to do. Continue growing in discipleship through temple worship, missionary work, service, and deepening your understanding of the Savior's Atonement.</p>
+                <a href="#disciple-blogs" class="stage-link">Explore Resources →</a>
+            </div>
+        </div>
+
+        <!-- Church Resources Section -->
+        <div class="resources-section" id="resources">
+            <h3>Church Resources to Inspire Sharing of the Gospel</h3>
+            <p style="text-align: center; margin-bottom: 2rem; color: #555;">From Church News to Global Reports, God's goodness in the hearts of members have blessed many lives.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-item">
+                    <h5>📖 Gospel Library</h5>
+                    <p>Access scriptures, conference talks, and church curriculum materials</p>
+                </div>
+                <div class="resource-item">
+                    <h5>📰 Church News</h5>
+                    <p>Stay updated with official church announcements and inspirational stories</p>
+                </div>
+                <div class="resource-item">
+                    <h5>🌍 Global Reports</h5>
+                    <p>Learn how the Church is blessing lives worldwide</p>
+                </div>
+                <div class="resource-item">
+                    <h5>🎵 Sacred Music</h5>
+                    <p>Hymns and sacred music to uplift and inspire</p>
+                </div>
+                <div class="resource-item">
+                    <h5>👨‍👩‍👧 Family Resources</h5>
+                    <p>Tools for gospel learning and family home evening</p>
+                </div>
+                <div class="resource-item">
+                    <h5>🙏 Temple Information</h5>
+                    <p>Temple locations, schedules, and preparation resources</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Preview Sections -->
+        <div class="blog-preview" id="children-blogs">
+            <h3>Recent Articles for Children</h3>
+            <div class="blog-list">
+                <div class="blog-item">
+                    <h4>Teaching Children to Pray with Purpose</h4>
+                    <div class="blog-meta">Faith Foundations • Ages 5-12</div>
+                    <p>Help your children develop meaningful prayer habits that will strengthen their relationship with Heavenly Father throughout their lives. Learn age-appropriate approaches to teaching the power of prayer.</p>
+                </div>
+                <div class="blog-item">
+                    <h4>Scripture Heroes: Learning from Book of Mormon Stories</h4>
+                    <div class="blog-meta">Gospel Learning • Ages 4-12</div>
+                    <p>Discover creative ways to bring Book of Mormon heroes to life for children, helping them see how ancient prophets' examples apply to their modern challenges.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-preview" id="teen-blogs">
+            <h3>Recent Articles for Teens</h3>
+            <div class="blog-list">
+                <div class="blog-item">
+                    <h4>Navigating Social Media While Keeping Your Values</h4>
+                    <div class="blog-meta">Digital Discipleship • Ages 13-17</div>
+                    <p>Practical guidance for teens on using social media in ways that uplift rather than undermine their testimonies. Learn to set boundaries and recognize harmful influences.</p>
+                </div>
+                <div class="blog-item">
+                    <h4>Building a Personal Testimony That Lasts</h4>
+                    <div class="blog-meta">Spiritual Growth • Ages 13-17</div>
+                    <p>Your testimony is uniquely yours. Discover how to nurture it through personal revelation, scripture study, and standing firm when friends may not understand your choices.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-preview" id="ysa-blogs">
+            <h3>Recent Articles for Young Single Adults</h3>
+            <div class="blog-list">
+                <div class="blog-item">
+                    <h4>Dating in the Modern World: Holding to Gospel Standards</h4>
+                    <div class="blog-meta">Relationships • Ages 18-25</div>
+                    <p>Navigate the dating scene while maintaining your values. Understanding the purpose of dating, setting appropriate boundaries, and recognizing when to move forward or step back.</p>
+                </div>
+                <div class="blog-item">
+                    <h4>Financial Wisdom: Avoiding the Debt Trap</h4>
+                    <div class="blog-meta">Life Skills • Ages 18-25</div>
+                    <p>Credit cards, student loans, and consumer culture target young adults aggressively. Learn how to make wise financial decisions aligned with gospel principles of self-reliance.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-preview" id="couple-blogs">
+            <h3>Recent Articles for Young Couples</h3>
+            <div class="blog-list">
+                <div class="blog-item">
+                    <h4>Creating Your Family Culture: Gospel-Centered Traditions</h4>
+                    <div class="blog-meta">Marriage & Family • Newlyweds</div>
+                    <p>As you begin your eternal family, establish traditions and patterns that will bless your home for generations. From daily scripture study to weekly family activities.</p>
+                </div>
+                <div class="blog-item">
+                    <h4>Unity in Marriage: Resolving Conflicts the Savior's Way</h4>
+                    <div class="blog-meta">Marriage Strengthening • All Couples</div>
+                    <p>Every marriage faces challenges. Learn how to approach disagreements with Christlike love, communicate effectively, and grow closer through trials rather than apart.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-preview" id="parent-blogs">
+            <h3>Recent Articles for Parents</h3>
+            <div class="blog-list">
+                <div class="blog-item">
+                    <h4>Protecting Children in the Digital Age</h4>
+                    <div class="blog-meta">Parenting • Digital Safety</div>
+                    <p>Modern technology brings unprecedented challenges for parents. Practical strategies for setting appropriate boundaries, monitoring content, and having open conversations about online dangers.</p>
+                </div>
+                <div class="blog-item">
+                    <h4>Making Family Home Evening Meaningful Again</h4>
+                    <div class="blog-meta">Family Gospel Learning • All Ages</div>
+                    <p>Transform family home evening from a checkbox activity into a powerful bonding experience. Creative lesson ideas and activities that engage children of all ages.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-preview" id="disciple-blogs">
+            <h3>Recent Articles for Disciples of Christ</h3>
+            <div class="blog-list">
+                <div class="blog-item">
+                    <h4>Deepening Your Temple Worship Experience</h4>
+                    <div class="blog-meta">Temple Service • Advanced</div>
+                    <p>Move beyond routine temple attendance to truly worship in the house of the Lord. Understanding symbolism, preparing spiritually, and finding personal revelation in sacred ordinances.</p>
+                </div>
+                <div class="blog-item">
+                    <h4>Ministering with Real Intent: More Than a Visit</h4>
+                    <div class="blog-meta">Service & Ministering • All Adults</div>
+                    <p>Transform your ministering efforts from obligation to genuine discipleship. Learn to see others as the Savior sees them and meet real needs with Christlike love.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p><strong>Iron Rod Life</strong> - Following the Savior's Path</p>
+        <p>Building faith, strengthening families, and following Christ at every life stage</p>
+        <div class="scripture-verse">
+            <p>"And it came to pass that I beheld that the rod of iron, which my father had seen, was the word of God, which led to the fountain of living waters, or to the tree of life."</p>
+            <p>— 1 Nephi 11:25</p>
+        </div>
+    </footer>
+</body>
+</html>
